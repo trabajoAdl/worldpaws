@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Paws - Registro</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d00d1e;
+            --secondary-color: #4ECDC4;
+            --dark-color: #292F36;
+            --light-color: #F7FFF7;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+        }
+        
+        .register-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .register-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .register-header h1 {
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .register-header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .register-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-control {
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(255, 107, 107, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .register-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .register-btn:hover {
+            background-color: #e05555;
+            transform: translateY(-2px);
+        }
+        
+        .social-register {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .google-btn {
+            background-color: #DB4437;
+        }
+        
+        .facebook-btn {
+            background-color: #4267B2;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .login-link a:hover {
+            color: var(--dark-color);
+        }
+        
+        .login-link .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            white-space: nowrap;
+            margin-bottom: 10px;
+        }
+        
+        .login-link a:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .enterprise-info {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        .enterprise-info p {
+            margin: 0;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        @media (max-width: 576px) {
+            .register-container {
+                margin: 20px;
+            }
+            
+            .register-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <h1>WORLD PAWS</h1>
+            <p>Enterprise Sensorideer (absolute)</p>
+        </div>
+        
+        <div class="register-body">
+            <a href="index.html" class="text-decoration-none text-light"><h2 class="text-center mb-4">REGISTRARSE</h2></a>
+            <p class="text-center mb-4">Crea tu cuenta para comenzar</p>
+            
+            <form>
+                <div class="form-group">
+                    <label for="name" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="Crea una contraseña segura" required>
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password" class="form-label">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="confirm-password" placeholder="Repite tu contraseña" required>
+                </div>
+                
+                <button type="submit" class="register-btn">Registrarse</button>
+            </form>
+            
+            <div class="social-register">
+                <p class="text-center w-100">O regístrate con</p>
+            </div>
+            
+            <div class="social-register">
+                <button class="social-btn google-btn">
+                    <i class="fab fa-google"></i>
+                </button>
+                <button class="social-btn facebook-btn">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+            </div>
+            
+            <div class="login-link">
+                <span>¿Ya tienes una cuenta?</span>
+                <a href="login.html">
+                    <strong>Iniciar sesión</strong>
+                    <span class="tooltip">Registrarse</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="enterprise-info">
+            <p>Discar protokolos...</p>
+            <p>Te entregamos todos los días desde 8:00 am - 6:00 pm</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Toggle para mostrar/ocultar contraseña
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        
+        togglePassword.addEventListener('click', function (e) {
+            // Cambiar el tipo de input
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // Cambiar el icono
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>

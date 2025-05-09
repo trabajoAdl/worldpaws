@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>World Paws</title>
+    <link rel="stylesheet" href="bootstrap-5.3.5-dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+
+
+
+    .bg-paws{
+        background: #d00d1e;
+    }
+    .ofertas{
+        width: 100%;
+        background: #d00d1e;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .etiqueta-oferta{
+        width: 80%;
+        display: flex;
+    }
+    .etiqueta-oferta ul{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .etiqueta-oferta ul li{
+        list-style: none;
+    }
+    .etiqueta-oferta ul li a{
+        position: relative;
+        text-decoration: none;
+        margin: 0 40px;
+        color: white;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+    .horario-etiqueta{
+        width: 15%;
+        text-align: center;
+        padding: 3px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+
+    .menu{
+        position: fixed;
+        background: white;
+        width: 100%;
+        box-shadow: 0px 2px 15px black;
+        z-index: 1025;
+    }
+
+    .menu nav{
+        width: 100%;
+        background: white;
+    }
+
+    .menu nav ul{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .menu nav ul li{
+        list-style: none;
+    }
+
+
+
+    .search-container {
+      background-color: #fbbf24; /* amarillo */
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      width: 600px;
+      margin: auto;
+    }
+    .search-container input {
+      border: none;
+      background: transparent;
+      flex: 1;
+      font-size: 1rem;
+      color: #78350f; /* texto más oscuro */
+    }
+    .search-container input::placeholder {
+      color: #78350f;
+      font-style: italic;
+      border: none;
+    }
+    .search-container i {
+      color: #78350f;
+      font-size: 1.2rem;
+    }
+    @media (max-width: 480px) {
+      .search-container {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+
+
+    .location-btn {
+      background-color: #d32f2f;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.7rem 1rem;
+      border-radius: 1rem;
+      border: none;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .location-btn i {
+      font-size: 2.5rem;
+      margin-right: 0.5rem;
+    }
+
+    .location-btn span {
+      display: block;
+      line-height: 1.2;
+      text-align: start;
+    }
+
+    .location-btn .bold {
+      font-weight: bold;
+      text-align: start;
+    }
+
+    @media (max-width: 480px) {
+      .location-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+      }
+      .location-btn i {
+        font-size: 1.2rem;
+      }
+    }
+
+
+
+
+    .user-login {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .user-login i {
+      font-size: 3rem;
+      color: #d32f2f;
+    }
+
+    .login-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-btn {
+      background-color: #d32f2f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+
+    .register-link {
+      font-style: italic;
+      font-size: 0.70rem;
+      color: #333;
+    }
+
+    @media (max-width: 480px) {
+      .user-login {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .login-actions {
+        align-items: center;
+      }
+    }
+
+
+    .cart-container {
+      position: relative;
+      width: 50px;
+      height: 50px;
+    }
+
+    .cart-icon {
+      font-size: 3rem;
+      color: orange;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #d32f2f;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    /* Responsive size */
+    @media (max-width: 576px) {
+      .cart-container {
+        width: 40px;
+        height: 40px;
+      }
+
+      .cart-icon {
+        font-size: 1.5rem;
+      }
+
+      .cart-badge {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+      }
+    }
+
+    .banner{
+        width: 100%;
+        background: #d00d1e;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: end;
+    }
+    .perro{
+        width: 35%;
+    }
+    .descuento{
+        width: 25%;
+    }
+    .perro img{
+        width: 100%;
+    }
+    .super-descuentos{
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .super-descuentos h1{
+        font-size: 60px;
+        font-weight: 600;
+        color: white;
+    }
+    .super-descuentos h1 span{
+        color: #fbbf24;
+        font-weight: 800;
+    }
+
+
+    input[type="text"] {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.logo-img{
+    width: 150px;
+}
+#ventana-registrar{
+    opacity: 0;
+    position: absolute;
+    width: 350px;
+    height: 550px;
+    background: white;
+    border-radius: 20px;
+    margin-top: 60px;
+    margin-left: -110px;
+    pointer-events: none; /* para que no se pueda hacer clic cuando está oculto */
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+    z-index: 1025;
+}
+#registrar:hover ~ #ventana-registrar{
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    z-index: 1025;
+}
+
+
+
+
+/* Título PAWS PROMOS */
+
+
+
+/* CSS */
+
+.fondo-patitas{
+  background: url("Recursos/Esquema web - World Paws-19.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  height: 12vh;
+}
+
+.marcas{
+  width: 100%;
+  height: 88vh;
+  align-content: end;
+}
+
+.hover-marcas {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.hover-marcas:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.oferta-img{
+  width: 100%;
+  background: url("Recursos/pie-17.png");
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+
+.inicio {
+      background: #1abc9c;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+
+    .horizontal-section {
+      height: 100vh;
+      position: relative;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      height: 100vh;
+    }
+
+    .panel {
+      min-width: 100vw;
+      height: 100%;
+      display: flex;
+    }
+
+    .final {
+      background: #f1c40f;
+      color: #222;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+
+    .color-btn-sub{
+      background: #FEBE3A;
+    }
+  </style>
+  <body>
+    
+
+    <!-- MENU -->
+     <section class="menu">
+        <!-- ETIQUETA OFERTA -->
+        <section class="ofertas">
+            <div class="etiqueta-oferta">
+                <ul>
+                    <li><a href="#"><span><i class='bx bxs-truck'></i></span> Te entregamos todos los días desde</a></li>
+                    <li class="horario-etiqueta">8:00 am - 6:00 pm</li>
+                </ul>
+            </div>
+        </section>
+        <!-- END ETIQUETA OFERTA -->
+        <nav>
+            <ul>
+                <li><a href="index.html"><img class="logo-img" src="logo.png" alt=""></a></li>
+                <li>
+                    <div class="ubicacion">
+                        <button class="location-btn">
+                            <i class='bx bx-map'></i>
+                            <span>Entregar a<br><span class="bold">Seleccionar Ubicación</span></span>
+                        </button>
+                    </div>
+                </li>
+                <li>
+                    <div class="input">
+                        <div class="search-container">
+                            <input type="text" placeholder="Buscar productos...">
+                            <a href="#"><i class='bx bx-search'></i></a>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="inicio-secion">
+                        <div class="user-login">
+                            <i class='bx bxs-user'></i>
+                            <div class="login-actions">
+                                <a href="login.html" class="login-btn text-decoration-none">INGRESAR</a>
+                                <a href="registrar.html" id="registrar" class="register-link ms-3">REGISTRARSE</a>
+                                <div id="ventana-registrar">
+                                    <div class="col-12 text-center rounded-top-4 bg-paws">
+                                        <h2 class="p-3 fw-bold text-light">INICIAR SESIÓN</h2>
+                                    </div>
+                                    <div class="col-12 p-3">
+                                        <p>Elige una de las opciones para iniciar sesión</p>
+                                    </div>
+                                    <div class="col-12 p-4 d-grid">
+                                        <a class="btn btn-outline-danger fw-bold" style="font-size: 13px;" href="#">Ingresar correo y contraseña</a>
+                                        <a class="btn btn-outline-dark fw-bold mt-3" style="font-size: 13px;" href="#"><span><img width="25" src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt=""></span> Google</a>
+                                        <a class="btn btn-outline-primary fw-bold mt-3" style="font-size: 13px;" href="#"><span><img width="25" src="https://img.icons8.com/?size=100&id=13912&format=png&color=000000" alt=""></span> Facebook</a>
+                                        
+                                    </div>
+                                    <div class="col-3 mx-auto">
+                                        <img class="img-fluid" src="Recursos/Perrito-10-10.png" alt="">
+                                    </div>
+                                    <div class="col-12 text-center mt-5">
+                                        <p>¿Eres nuevo en World Paws? <span><a class="text-danger fw-bold" href="#">Registrate</a></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="carrito-compra">
+                        <div class="cart-container">
+                            <i class='bx bx-cart cart-icon'></i>
+                            <span class="cart-badge">0</span> <!-- Aquí puedes poner cualquier número dinámicamente -->
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+     </section>
+    <!-- END MENU -->
+
+    <!-- BANNER -->
+     <section class="banner">
+        <div class="super-descuentos">
+            <h1>¡Aprovecha<br>nuestras <span>Súper</span><br><span>Descuentos</span></h1>
+        </div>
+        <div class="perro">
+            <img src="Recursos/Perrito-10-10.png" alt="">
+        </div>
+        <div class="descuento">
+            <!-- HTML -->
+
+        </div>
+     </section>
+    <!-- END BANNER -->
+
+
+    <!-- MARCAS -->
+     <section class="container-fluid fondo-patitas">
+        <div class="row">
+          <div class="col-3 p-3 d-flex justify-content-evenly h-100 align-items-center border-3 border-end border-danger">
+              <div class="col-4 d-flex justify-content-end">
+                <div class="col-4"><img class="img-fluid" src="Recursos/Esquema web - World Paws-13.png" alt=""></div>
+              </div>
+              <div class="col-6">
+                <strong>Escribenos al</strong><br><span>+51 999 888 777</span>
+              </div>
+          </div>
+          <div class="col-3 p-3 d-flex justify-content-evenly h-100 align-items-center border-3 border-end border-danger">
+              <div class="col-4 d-flex justify-content-end">
+                <div class="col-4"><img class="img-fluid" src="Recursos/Esquema web - World Paws-14.png" alt=""></div>
+              </div>
+              <div class="col-6">
+                <strong>Delivery Gratis</strong><br><span>Compras mayores a s/100</span>
+              </div>
+          </div>
+          <div class="col-3 p-3 d-flex justify-content-evenly h-100 align-items-center border-3 border-end border-danger">
+              <div class="col-4 d-flex justify-content-end">
+                <div class="col-4"><img class="img-fluid" src="Recursos/Esquema web - World Paws-15.png" alt=""></div>
+              </div>
+              <div class="col-6">
+                <strong>Punto de Recojo</strong><br><span>Av. Jose Pardo 601, Miraflores</span>
+              </div>
+          </div>
+          <div class="col-3 p-3 d-flex justify-content-evenly h-100 align-items-center ">
+              <div class="col-4 d-flex justify-content-end">
+                <div class="col-4"><img class="img-fluid" src="Recursos/Esquema web - World Paws-16.png" alt=""></div>
+              </div>
+              <div class="col-6">
+                <strong>Escribenos al</strong><br><span>Pedidos antes de las 11:00am</span>
+              </div>
+          </div>
+        </div>
+     </section>
+
+
+    <!-- END MARCAS -->
+     <section class="container-fluid marcas">
+        <div class="row">
+          <div class="col-12 text-center justify-content-center mt-5">
+            <div class="col-3 mx-auto"><img class="img-fluid" src="assets/Las mejores marcas.png" alt=""></div>
+          </div>
+        </div><br><br><br>
+            <div class="row d-flex justify-content-center">
+
+              <div class="col-2">
+                <a href="marcas.html">
+                <div class="col-10  rounded-circle hover-marcas">
+                  <img class="img-fluid" src="assets/Rico Can-07.png" alt="">
+                </div>
+                </a>
+              </div>
+
+              <div class="col-2">
+                <a href="marcas.html">
+                <div class="col-10  rounded-circle hover-marcas">
+                  <img class="img-fluid" src="assets/Mimaskoy-09.png" alt="">
+                </div>
+                </a>
+              </div>
+
+              <div class="col-2">
+                <a href="marcas.html">
+                <div class="col-10  rounded-circle hover-marcas">
+                  <img class="img-fluid" src="assets/Esquema web - World Paws-11.png" alt="">
+                </div>
+                </a>
+              </div>
+
+              <div class="col-2">
+                <a href="marcas.html">
+                <div class="col-10  rounded-circle hover-marcas">
+                  <img class="img-fluid" src="assets/Dog Chow-10.png" alt="">
+                </div>
+                </a>
+              </div>
+
+              <div class="col-2">
+                <a href="marcas.html">
+                <div class="col-10  rounded-circle hover-marcas">
+                  <img class="img-fluid" src="assets/Canbo-08.png" alt="">
+                </div>
+                </a>
+              </div>
+
+            </div>
+            <br><br><br><br><br><br>
+            <div class="row">
+              <div class="oferta-img"></div>
+            </div>
+        
+     </section>
+
+
+
+     <section class="container-fluid bg-paws">
+      <br><br><br><br><br><br><br><br>
+      <div class="container-fluid">
+        <div class="row justify-content-around">
+          <div class="col-4 justify-content-center">
+            <a href="marcas.html">
+            <div class="col-11 mx-auto"><img class="img-fluid" src="assets/Mundo canino.png" alt=""></div></a>
+          </div>
+
+          <div class="col-4 justify-content-center">
+            <a href="marcas.html">
+            <div class="col-11 mx-auto"><img class="img-fluid" src="assets/Mundo Minino.png" alt=""></div></a>
+          </div>
+
+          <div class="col-4 justify-content-center">
+            <a href="marcas.html">
+            <div class="col-11 mx-auto"><img class="img-fluid" src="assets/Mundop mascotas.png" alt=""></div></a>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-end">
+          <div class="col-2 d-grid"><a class="btn btn-warning color-btn-sub text-danger" style="font-size: 20px;" href="registrar.html">Quiero suscribirme</a></div>
+        </div>
+        <br><br><br>
+      </div>
+     </section>
+
+     <section class="container-fluid">
+      <br><br><br><br><br>
+        <div class="row  justify-content-around ">
+
+          <div class="col-12 justify-content-center">
+            <div class="col-3 mx-auto"><img class="img-fluid" src="assets/Esquema web - World Paws.png" alt=""></div>
+          </div>
+
+          <div class="col-12 mt-5"></div>
+
+          <div class="col-4 d-flex justify-content-center mt-5"><div class="col-10 mx-auto"><img class="img-fluid" src="assets/Promos-15.png" alt=""></div></div>
+          <div class="col-4 d-flex justify-content-center mt-5"><div class="col-10 mx-auto"><img class="img-fluid" src="assets/Promos-16.png" alt=""></div></div>
+          <div class="col-4 d-flex justify-content-center mt-5"><div class="col-10 mx-auto"><img class="img-fluid" src="assets/Promos-17.png" alt=""></div></div>
+        </div>
+        <br><br><br><br><br><br>
+     </section>
+
+<style>
+  .footer-img{
+    width: 100%;
+    height: 100vh;
+    background: url('assets/Footer.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+     <footer class="footer-img">
+
+     </footer>
+
+
+<!-- GSAP & ScrollTrigger -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+     <script>
+        document.querySelector('.cart-badge').innerText = 5; // cambia 5 por el número deseado
+     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
+</html>

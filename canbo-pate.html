@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Paws - Detalle de Producto</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Glider.js para el slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.css">
+
+
+    <link rel="stylesheet" href="bootstrap-5.3.5-dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <style>
+        :root {
+            --primary-color: #d00d1e;
+            --secondary-color: #4ECDC4;
+            --dark-color: #292F36;
+            --light-color: #F7FFF7;
+            --gray-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--gray-light);
+            color: var(--dark-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .product-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            flex: 1;
+        }
+        
+        .product-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+        }
+        
+        .product-header h1 {
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .product-body {
+            padding: 30px;
+        }
+        
+        .product-gallery {
+            position: relative;
+        }
+        
+        .main-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: zoom-in;
+            transition: transform 0.3s;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .thumbnail:hover, .thumbnail.active {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .product-info {
+            position: relative;
+        }
+        
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .product-brand {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+        
+        .product-price .old-price {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .product-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .product-meta {
+            margin-bottom: 25px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .meta-item i {
+            color: var(--primary-color);
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray-light);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+        }
+        
+        .btn-add-to-cart {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-add-to-cart:hover {
+            background-color: #e05555;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-wishlist {
+            background-color: white;
+            color: var(--dark-color);
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            margin-left: 15px;
+            transition: all 0.3s;
+        }
+        
+        .btn-wishlist:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+
+        /* Mejoras para las pestañas */
+        .product-tabs {
+            margin-top: 50px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .nav-tabs {
+            border-bottom: none;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--dark-color);
+            font-weight: 600;
+            border: none;
+            padding: 12px 25px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+        
+        .nav-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            padding: 30px;
+            border: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .product-tabs {
+            margin-top: 50px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--dark-color);
+            font-weight: 600;
+            border: none;
+            padding: 12px 20px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            background-color: transparent;
+        }
+        
+        .tab-content {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .review-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .review-author {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .review-date {
+            color: #777;
+            font-size: 0.8rem;
+        }
+        
+        .rating {
+            color: #FFD700;
+            margin: 5px 0;
+        }
+        
+        .zoom-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: zoom-out;
+            display: none;
+        }
+        
+        .zoomed-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        /* Estilos para productos relacionados */
+        .related-products {
+            margin: 50px 0;
+            padding: 0 30px;
+        }
+        
+        .related-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .related-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .related-slider {
+            position: relative;
+        }
+        
+        .related-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .related-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .related-body {
+            padding: 15px;
+        }
+        
+        .related-product-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .related-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .related-old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+        
+        .glider-prev, .glider-next {
+            top: 40%;
+            color: var(--dark-color);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .glider-prev:hover, .glier-next:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+        
+        /* Estilos para el footer */
+        .footer {
+            background-color: #d00d1e;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-links {
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-title {
+                font-size: 1.5rem;
+            }
+            
+            .product-price {
+                font-size: 1.5rem;
+            }
+            
+            .btn-add-to-cart, .btn-wishlist {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+
+
+<style>
+
+
+
+
+    .bg-paws{
+        background: #d00d1e;
+    }
+    .ofertas{
+        width: 100%;
+        background: #d00d1e;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .etiqueta-oferta{
+        width: 80%;
+        display: flex;
+    }
+    .etiqueta-oferta ul{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .etiqueta-oferta ul li{
+        list-style: none;
+    }
+    .etiqueta-oferta ul li a{
+        position: relative;
+        text-decoration: none;
+        margin: 0 40px;
+        color: white;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+    .horario-etiqueta{
+        width: 15%;
+        text-align: center;
+        padding: 3px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+
+    .menu{
+        position: fixed;
+        background: white;
+        width: 100%;
+        box-shadow: 0px 2px 15px black;
+        z-index: 1025;
+    }
+
+    .menu nav{
+        width: 100%;
+        background: white;
+    }
+
+    .menu nav ul{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .menu nav ul li{
+        list-style: none;
+    }
+
+
+
+    .search-container {
+      background-color: #fbbf24; /* amarillo */
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      width: 600px;
+      margin: auto;
+    }
+    .search-container input {
+      border: none;
+      background: transparent;
+      flex: 1;
+      font-size: 1rem;
+      color: #78350f; /* texto más oscuro */
+    }
+    .search-container input::placeholder {
+      color: #78350f;
+      font-style: italic;
+      border: none;
+    }
+    .search-container i {
+      color: #78350f;
+      font-size: 1.2rem;
+    }
+    @media (max-width: 480px) {
+      .search-container {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+
+
+    .location-btn {
+      background-color: #d32f2f;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.7rem 1rem;
+      border-radius: 1rem;
+      border: none;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .location-btn i {
+      font-size: 2.5rem;
+      margin-right: 0.5rem;
+    }
+
+    .location-btn span {
+      display: block;
+      line-height: 1.2;
+      text-align: start;
+    }
+
+    .location-btn .bold {
+      font-weight: bold;
+      text-align: start;
+    }
+
+    @media (max-width: 480px) {
+      .location-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+      }
+      .location-btn i {
+        font-size: 1.2rem;
+      }
+    }
+
+
+
+
+    .user-login {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .user-login i {
+      font-size: 3rem;
+      color: #d32f2f;
+    }
+
+    .login-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-btn {
+      background-color: #d32f2f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+
+    .register-link {
+      font-style: italic;
+      font-size: 0.70rem;
+      color: #333;
+    }
+
+    @media (max-width: 480px) {
+      .user-login {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .login-actions {
+        align-items: center;
+      }
+    }
+
+
+    .cart-container {
+      position: relative;
+      width: 50px;
+      height: 50px;
+    }
+
+    .cart-icon {
+      font-size: 3rem;
+      color: orange;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #d32f2f;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    /* Responsive size */
+    @media (max-width: 576px) {
+      .cart-container {
+        width: 40px;
+        height: 40px;
+      }
+
+      .cart-icon {
+        font-size: 1.5rem;
+      }
+
+      .cart-badge {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+      }
+    }
+
+    .banner{
+        width: 100%;
+        background: #d00d1e;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: end;
+    }
+    .perro{
+        width: 35%;
+    }
+    .descuento{
+        width: 25%;
+    }
+    .perro img{
+        width: 100%;
+    }
+    .super-descuentos{
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .super-descuentos h1{
+        font-size: 60px;
+        font-weight: 600;
+        color: white;
+    }
+    .super-descuentos h1 span{
+        color: #fbbf24;
+        font-weight: 800;
+    }
+
+
+    input[type="text"] {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.logo-img{
+    width: 150px;
+}
+#ventana-registrar{
+    opacity: 0;
+    position: absolute;
+    width: 350px;
+    height: 550px;
+    background: white;
+    border-radius: 20px;
+    margin-top: 60px;
+    margin-left: -110px;
+    pointer-events: none; /* para que no se pueda hacer clic cuando está oculto */
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+    z-index: 1025;
+}
+#registrar:hover ~ #ventana-registrar{
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    z-index: 1025;
+}
+
+
+
+
+/* Título PAWS PROMOS */
+
+
+
+/* CSS */
+
+.fondo-patitas{
+  background: url("Recursos/Esquema web - World Paws-19.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  height: 12vh;
+}
+
+.marcas{
+  width: 100%;
+  height: 88vh;
+  align-content: end;
+}
+
+.hover-marcas {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.hover-marcas:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.oferta-img{
+  width: 100%;
+  background: url("Recursos/pie-17.png");
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+
+.inicio {
+      background: #1abc9c;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+
+    .horizontal-section {
+      height: 100vh;
+      position: relative;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      height: 100vh;
+    }
+
+    .panel {
+      min-width: 100vw;
+      height: 100%;
+      display: flex;
+    }
+
+    .final {
+      background: #f1c40f;
+      color: #222;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- MENU -->
+     <section class="menu">
+        <!-- ETIQUETA OFERTA -->
+        <section class="ofertas">
+            <div class="etiqueta-oferta">
+                <ul>
+                    <li><a href="#"><span><i class='bx bxs-truck'></i></span> Te entregamos todos los días desde</a></li>
+                    <li class="horario-etiqueta">8:00 am - 6:00 pm</li>
+                </ul>
+            </div>
+        </section>
+        <!-- END ETIQUETA OFERTA -->
+        <nav>
+            <ul>
+                <li><a href="index.html"><img class="logo-img" src="logo.png" alt=""></a></li>
+                <li>
+                    <div class="ubicacion">
+                        <button class="location-btn">
+                            <i class='bx bx-map'></i>
+                            <span>Entregar a<br><span class="bold">Seleccionar Ubicación</span></span>
+                        </button>
+                    </div>
+                </li>
+                <li>
+                    <div class="input">
+                        <div class="search-container">
+                            <input type="text" placeholder="Buscar productos...">
+                            <a href="#"><i class='bx bx-search'></i></a>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="inicio-secion">
+                        <div class="user-login">
+                            <i class='bx bxs-user'></i>
+                            <div class="login-actions">
+                                <a href="login.html" class="login-btn text-decoration-none">INGRESAR</a>
+                                <a href="registrar.html" id="registrar" class="register-link ms-3">REGISTRARSE</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="carrito-compra">
+                        <div class="cart-container">
+                            <i class='bx bx-cart cart-icon'></i>
+                            <span class="cart-badge">0</span> <!-- Aquí puedes poner cualquier número dinámicamente -->
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+     </section>
+
+
+<br><br><br><br><br><br><br>
+
+    <div class="product-container">
+        <div class="product-header">
+            <h1>WORLD PAWS</h1>
+        </div>
+        
+        <div class="product-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-gallery">
+                        <img src="assets/Canbo/2.png" alt="Juguete para perros" class="main-image" id="mainImage">
+                        <div class="thumbnail-container">
+                            <img src="assets/Canbo/2.png" alt="Miniatura 1" class="thumbnail active" onclick="changeImage(this, 'assets/Canbo/2.png')">
+                            <img src="assets/Canbo/3.png" alt="Miniatura 2" class="thumbnail" onclick="changeImage(this, 'assets/Canbo/3.png')">
+                            <img src="assets/Canbo/4.png" alt="Miniatura 3" class="thumbnail" onclick="changeImage(this, 'assets/Canbo/4.png')">
+                            <img src="assets/Canbo/5.png" alt="Miniatura 4" class="thumbnail" onclick="changeImage(this, 'assets/Canbo/5.png')">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <h1 class="product-title">Pate para cachorros</h1>
+                        <span class="product-brand">PAWS PROMO</span>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="color: #777; margin-left: 5px;">(42 reseñas)</span>
+                        </div>
+                        
+                        <div class="product-price">
+                            s/19.90 <span class="old-price">s/24.90</span>
+                        </div>
+                        
+                        <p class="product-description">
+                            Alimento húmedo de alta calidad, especialmente formulado para cachorros. Rico en proteínas, vitaminas y minerales esenciales para un crecimiento sano y fuerte. Elaborado con ingredientes naturales, sin conservantes artificiales ni subproductos.
+                        </p>
+                        
+                        <div class="product-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-box-open"></i>
+                                <span>Disponibilidad: <strong>En stock (25 unidades)</strong></span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-truck"></i>
+                                <span>Envío: <strong>Gratis para Lima</strong></span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Garantía: <strong>30 días de devolución</strong></span>
+                            </div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        
+                        <div class="d-flex flex-wrap">
+                            <button class="btn-add-to-cart">
+                                <i class="fas fa-shopping-cart"></i> Añadir al carrito
+                            </button>
+                            <button class="btn-wishlist">
+                                <i class="far fa-heart"></i> Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="product-tabs">
+            <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Descripción</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">Especificaciones</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Reseñas (42)</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="productTabsContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel">
+                        <h4>Detalles del producto</h4>
+                        <p>El Paté para Cachorros PAWS PROMO está especialmente formulado para brindar una alimentación equilibrada y deliciosa a tu mascota en sus primeros meses de vida. Cada paquete incluye:</p>
+                        <ul>
+                            <li>3 latas de 400g de paté premium</li>
+                            <li>Ingredientes naturales y de alta calidad</li>
+                            <li>Enriquecido con vitaminas y minerales esenciales</li>
+                            <li>Textura suave y fácil de digerir</li>
+                            <li>Sin colorantes ni conservantes artificiales</li>
+                            <li>Recomendado para cachorros de todas las razas y tamaños.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="specs" role="tabpanel">
+                        <table class="table">
+                            <tr>
+                                <th>Ingredientes principales</th>
+                                <td>Pollo, arroz, zanahoria</td>
+                            </tr>
+                            <tr>
+                                <th>Contenido neto</th>
+                                <td>400g por lata</td>
+                            </tr>
+                            <tr>
+                                <th>Presentación</th>
+                                <td>Pack de 3 latas</td>
+                            </tr>
+                            <tr>
+                                <th>Edad recomendada</th>
+                                <td>Cachorros hasta 12 meses</td>
+                            </tr>
+                            <tr>
+                                <th>Vida útil</th>
+                                <td>12 meses (almacenado en lugar fresco y seco)</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                        <div class="review-item">
+                            <div class="review-author">Carlos M.</div>
+                            <div class="review-date">15 Enero 2023</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>¡A mi labrador le encanta! Las pelotas son muy resistentes, lleva 2 semanas jugando con ellas y aún están como nuevas.</p>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-author">María L.</div>
+                            <div class="review-date">3 Diciembre 2022</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <p>Buen producto, pero una de las pelotas se rompió después de un mes de uso intenso con mi pastor alemán.</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+
+
+        <!-- Sección de productos relacionados -->
+        <div class="related-products">
+            <h3 class="related-title">Productos Relacionados</h3>
+            <div class="related-slider">
+                <div class="glider-contain">
+                    <div class="glider">
+                        <!-- Producto 1 -->
+                        <div class="related-card">
+                            <img src="assets/Canbo/11.png" alt="Producto relacionado 1" class="related-img">
+                            <div class="related-body">
+                                <h5 class="related-product-title">Cama Comfort para Perros</h5>
+                                <div class="related-price">s/89.90 <span class="related-old-price">s/99.90</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 2 -->
+                        <div class="related-card">
+                            <img src="assets/Canbo/12.png" alt="Producto relacionado 2" class="related-img">
+                            <div class="related-body">
+                                <h5 class="related-product-title">Correa Retráctil Premium</h5>
+                                <div class="related-price">s/49.90 <span class="related-old-price">s/59.90</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 3 -->
+                        <div class="related-card">
+                            <img src="assets/Canbo/6.png" alt="Producto relacionado 3" class="related-img">
+                            <div class="related-body">
+                                <h5 class="related-product-title">Comedero Automático</h5>
+                                <div class="related-price">s/129.90</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 4 -->
+                        <div class="related-card">
+                            <img src="assets/Canbo/7.png" alt="Producto relacionado 4" class="related-img">
+                            <div class="related-body">
+                                <h5 class="related-product-title">Shampoo para Perros</h5>
+                                <div class="related-price">s/29.90 <span class="related-old-price">s/34.90</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 5 -->
+                        <div class="related-card">
+                            <img src="assets/Canbo/9.png" alt="Producto relacionado 5" class="related-img">
+                            <div class="related-body">
+                                <h5 class="related-product-title">Arnés Ajustable</h5>
+                                <div class="related-price">s/39.90</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button aria-label="Previous" class="glider-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button aria-label="Next" class="glider-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        </div>
+    </div>
+    
+    <div class="zoom-overlay" id="zoomOverlay">
+        <img src="" alt="Imagen ampliada" class="zoomed-image" id="zoomedImage">
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo">WORLD PAWS</div>
+                    <p>Tienda especializada en productos para mascotas. Ofrecemos la mejor calidad y servicio para tus amigos peludos.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon text-decoration-none text-light"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon text-decoration-none text-light"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon text-decoration-none text-light"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon text-decoration-none text-light"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Compañía</h5>
+                        <ul>
+                            <li><a href="#">Nosotros</a></li>
+                            <li><a href="#">Servicios</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Ayuda</h5>
+                        <ul>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Envíos</a></li>
+                            <li><a href="#">Devoluciones</a></li>
+                            <li><a href="#">Guías</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Contacto</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Av. Las Mascotas 123, Lima</li>
+                            <li><i class="fas fa-phone me-2"></i> (01) 123-4567</li>
+                            <li><i class="fas fa-envelope me-2"></i> info@worldpaws.com</li>
+                            <li><i class="fas fa-clock me-2"></i> Lunes a Sábado: 9am - 8pm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 World Paws. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <!-- Glider.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js"></script>
+    <script>
+        // ... (scripts anteriores se mantienen) ...
+        
+        // Inicializar el slider de productos relacionados
+        new Glider(document.querySelector('.glider'), {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            draggable: true,
+            arrows: {
+                prev: '.glider-prev',
+                next: '.glider-next'
+            },
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    </script>
+    
+    <script>
+        // Cambiar imagen principal al hacer clic en miniaturas
+        function changeImage(element, newImage) {
+            document.getElementById('mainImage').src = newImage;
+            
+            // Remover clase active de todas las miniaturas
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            
+            // Añadir clase active a la miniatura clickeada
+            element.classList.add('active');
+        }
+        
+        // Zoom de imagen
+        const mainImage = document.getElementById('mainImage');
+        const zoomOverlay = document.getElementById('zoomOverlay');
+        const zoomedImage = document.getElementById('zoomedImage');
+        
+        mainImage.addEventListener('click', function() {
+            zoomedImage.src = this.src;
+            zoomOverlay.style.display = 'flex';
+        });
+        
+        zoomOverlay.addEventListener('click', function() {
+            this.style.display = 'none';
+        });
+        
+        // Selector de cantidad
+        const minusBtn = document.querySelector('.quantity-btn.minus');
+        const plusBtn = document.querySelector('.quantity-btn.plus');
+        const quantityInput = document.querySelector('.quantity-input');
+        
+        minusBtn.addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
+            }
+        });
+        
+        plusBtn.addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            if (value < 10) {
+                quantityInput.value = value + 1;
+            }
+        });
+    </script>
+</body>
+</html>

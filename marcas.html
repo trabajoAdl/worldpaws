@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croquetas - WorldPaws</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="bootstrap-5.3.5-dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <style>
+        :root {
+            --primary-color: #d00d1e;
+            --secondary-color: #4ECDC4;
+            --dark-color: #292F36;
+            --light-color: #F7FFF7;
+            --gray-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--gray-light);
+            color: var(--dark-color);
+        }
+        
+        /* Header */
+        .category-header {
+            background: #FBBF24;
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        /* Filtros */
+        .filter-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .filter-title {
+            background-color: var(--light-color);
+            font-weight: 600;
+            padding: 12px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-content {
+            padding: 15px;
+        }
+        
+        .filter-group {
+            margin-bottom: 12px;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        /* Chips de filtros activos */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-chip {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-chip i {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        
+        /* Productos */
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            margin-bottom: 25px;
+            height: 100%;
+            border-top: 3px solid var(--secondary-color);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.2);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-img {
+            height: 180px;
+            object-fit: contain;
+            background: #f9f9f9;
+            padding: 20px;
+        }
+        
+        .product-body {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: var(--dark-color);
+        }
+        
+        .product-brand {
+            color: var(--secondary-color);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .product-old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .btn-add-to-cart {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-add-to-cart:hover {
+            background-color: #e05555;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .filter-column {
+                position: fixed;
+                top: 0;
+                left: -300px;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                z-index: 1000;
+                padding: 20px;
+                overflow-y: auto;
+                transition: left 0.3s;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .filter-column.active {
+                left: 0;
+            }
+            
+            .filter-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+                display: none;
+            }
+            
+            .filter-overlay.active {
+                display: block;
+            }
+            
+            .mobile-filter-btn {
+                display: block !important;
+            }
+        }
+
+        .bg-paws{
+        background: #d00d1e;
+    }
+    .ofertas{
+        width: 100%;
+        background: #d00d1e;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .etiqueta-oferta{
+        width: 80%;
+        display: flex;
+    }
+    .etiqueta-oferta ul{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .etiqueta-oferta ul li{
+        list-style: none;
+    }
+    .etiqueta-oferta ul li a{
+        position: relative;
+        text-decoration: none;
+        margin: 0 40px;
+        color: white;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+    .horario-etiqueta{
+        width: 15%;
+        text-align: center;
+        padding: 3px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+
+    .menu{
+        position: fixed;
+        background: white;
+        width: 100%;
+        box-shadow: 0px 2px 15px black;
+        z-index: 1025;
+    }
+
+    .menu nav{
+        width: 100%;
+        background: white;
+    }
+
+    .menu nav ul{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .menu nav ul li{
+        list-style: none;
+    }
+
+
+
+    .search-container {
+      background-color: #fbbf24; /* amarillo */
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      width: 600px;
+      margin: auto;
+    }
+    .search-container input {
+      border: none;
+      background: transparent;
+      flex: 1;
+      font-size: 1rem;
+      color: #78350f; /* texto más oscuro */
+    }
+    .search-container input::placeholder {
+      color: #78350f;
+      font-style: italic;
+      border: none;
+    }
+    .search-container i {
+      color: #78350f;
+      font-size: 1.2rem;
+    }
+    @media (max-width: 480px) {
+      .search-container {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+
+
+    .location-btn {
+      background-color: #d32f2f;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.7rem 1rem;
+      border-radius: 1rem;
+      border: none;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .location-btn i {
+      font-size: 2.5rem;
+      margin-right: 0.5rem;
+    }
+
+    .location-btn span {
+      display: block;
+      line-height: 1.2;
+      text-align: start;
+    }
+
+    .location-btn .bold {
+      font-weight: bold;
+      text-align: start;
+    }
+
+    @media (max-width: 480px) {
+      .location-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+      }
+      .location-btn i {
+        font-size: 1.2rem;
+      }
+    }
+
+
+
+
+    .user-login {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .user-login i {
+      font-size: 3rem;
+      color: #d32f2f;
+    }
+
+    .login-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-btn {
+      background-color: #d32f2f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+
+    .register-link {
+      font-style: italic;
+      font-size: 0.70rem;
+      color: #333;
+    }
+
+    @media (max-width: 480px) {
+      .user-login {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .login-actions {
+        align-items: center;
+      }
+    }
+
+    .user-login {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .user-login i {
+      font-size: 3rem;
+      color: #d32f2f;
+    }
+
+    .login-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-btn {
+      background-color: #d32f2f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+
+    .register-link {
+      font-style: italic;
+      font-size: 0.70rem;
+      color: #333;
+    }
+
+    @media (max-width: 480px) {
+      .user-login {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .login-actions {
+        align-items: center;
+      }
+    }
+
+
+    .cart-container {
+      position: relative;
+      width: 50px;
+      height: 50px;
+    }
+
+    .cart-icon {
+      font-size: 3rem;
+      color: orange;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #d32f2f;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    /* Responsive size */
+    @media (max-width: 576px) {
+      .cart-container {
+        width: 40px;
+        height: 40px;
+      }
+
+      .cart-icon {
+        font-size: 1.5rem;
+      }
+
+      .cart-badge {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+      }
+    }
+
+    .banner{
+        width: 100%;
+        background: #d00d1e;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: end;
+    }
+    .perro{
+        width: 35%;
+    }
+    .descuento{
+        width: 25%;
+    }
+    .perro img{
+        width: 100%;
+    }
+    .super-descuentos{
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .super-descuentos h1{
+        font-size: 60px;
+        font-weight: 600;
+        color: white;
+    }
+    .super-descuentos h1 span{
+        color: #fbbf24;
+        font-weight: 800;
+    }
+
+
+    input[type="text"] {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.logo-img{
+    width: 150px;
+}
+#ventana-registrar{
+    opacity: 0;
+    position: absolute;
+    width: 350px;
+    height: 550px;
+    background: white;
+    border-radius: 20px;
+    margin-top: 60px;
+    margin-left: -110px;
+    pointer-events: none; /* para que no se pueda hacer clic cuando está oculto */
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+    z-index: 1025;
+}
+#registrar:hover ~ #ventana-registrar{
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    z-index: 1025;
+}
+
+
+
+
+/* Título PAWS PROMOS */
+
+
+
+/* CSS */
+
+.fondo-patitas{
+  background: url("Recursos/Esquema web - World Paws-19.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  height: 12vh;
+}
+
+.marcas{
+  width: 100%;
+  height: 88vh;
+  align-content: end;
+}
+
+.hover-marcas {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.hover-marcas:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.oferta-img{
+  width: 100%;
+  background: url("Recursos/pie-17.png");
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+
+.inicio {
+      background: #1abc9c;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+
+    .horizontal-section {
+      height: 100vh;
+      position: relative;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      height: 100vh;
+    }
+
+    .panel {
+      min-width: 100vw;
+      height: 100%;
+      display: flex;
+    }
+
+    .final {
+      background: #f1c40f;
+      color: #222;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+    </style>
+</head>
+<body>
+
+<!-- MENU -->
+     <section class="menu">
+        <!-- ETIQUETA OFERTA -->
+        <section class="ofertas">
+            <div class="etiqueta-oferta">
+                <ul>
+                    <li><a href="#"><span><i class='bx bxs-truck'></i></span> Te entregamos todos los días desde</a></li>
+                    <li class="horario-etiqueta">8:00 am - 6:00 pm</li>
+                </ul>
+            </div>
+        </section>
+        <!-- END ETIQUETA OFERTA -->
+        <nav>
+            <ul>
+                <li><a href="index.html"><img class="logo-img" src="logo.png" alt=""></a></li>
+                <li>
+                    <div class="ubicacion">
+                        <button class="location-btn">
+                            <i class='bx bx-map'></i>
+                            <span>Entregar a<br><span class="bold">Seleccionar Ubicación</span></span>
+                        </button>
+                    </div>
+                </li>
+                <li>
+                    <div class="input">
+                        <div class="search-container">
+                            <input type="text" placeholder="Buscar productos...">
+                            <a href="#"><i class='bx bx-search'></i></a>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="inicio-secion">
+                        <div class="user-login">
+                            <i class='bx bxs-user'></i>
+                            <div class="login-actions">
+                                <a href="login.html" class="login-btn text-decoration-none">INGRESAR</a>
+                                <a href="registrar.html" id="registrar" class="register-link ms-3">REGISTRARSE</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="carrito-compra">
+                        <div class="cart-container">
+                            <i class='bx bx-cart cart-icon'></i>
+                            <span class="cart-badge">0</span> <!-- Aquí puedes poner cualquier número dinámicamente -->
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+     </section>
+     <br><br><br><br><br><br>
+    <!-- Header de Categoría -->
+    <header class="category-header">
+        <div class="container text-center">
+            <h1 class="mb-3 text-black"><i class="fas fa-bone"></i> Croquetas</h1>
+            <p class="mb-0 text-black">Encuentra el alimento perfecto para tu mascota</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mb-5">
+        <div class="row">
+            <!-- Filtros - Columna Izquierda -->
+            <div class="col-lg-3 filter-column" id="filterColumn">
+                <div class="filter-overlay" id="filterOverlay"></div>
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Filtrar croquetas</h5>
+                    <button class="btn btn-sm btn-outline-danger d-lg-none" id="closeFilters">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Filtros activos -->
+                <div class="active-filters mb-4">
+                    <div class="filter-chip">
+                        Perros <i class="fas fa-times"></i>
+                    </div>
+                    <div class="filter-chip">
+                        Royal Canin <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                
+                <!-- Filtro por mascota -->
+                <div class="filter-section">
+                    <div class="filter-title" onclick="toggleFilter('petFilter')">
+                        <span>Tipo de Mascota</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content" id="petFilter">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="petDog" checked>
+                            <label class="form-check-label" for="petDog">
+                                Perros
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="petCat">
+                            <label class="form-check-label" for="petCat">
+                                Gatos
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="petOther">
+                            <label class="form-check-label" for="petOther">
+                                Otras mascotas
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filtro por marca -->
+                <div class="filter-section">
+                    <div class="filter-title" onclick="toggleFilter('brandFilter')">
+                        <span>Marcas</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content" id="brandFilter">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Buscar marca...">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="brandRoyal" checked>
+                            <label class="form-check-label" for="brandRoyal">
+                                Royal Canin
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="brandPedigree">
+                            <label class="form-check-label" for="brandPedigree">
+                                Pedigree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="brandPurina">
+                            <label class="form-check-label" for="brandPurina">
+                                Purina
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="brandHills">
+                            <label class="form-check-label" for="brandHills">
+                                Hill's Science
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filtro por edad -->
+                <div class="filter-section">
+                    <div class="filter-title" onclick="toggleFilter('ageFilter')">
+                        <span>Edad</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content" id="ageFilter">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="agePuppy">
+                            <label class="form-check-label" for="agePuppy">
+                                Cachorro/Gatito
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="ageAdult" checked>
+                            <label class="form-check-label" for="ageAdult">
+                                Adulto
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="ageSenior">
+                            <label class="form-check-label" for="ageSenior">
+                                Senior
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filtro por tamaño de raza -->
+                <div class="filter-section">
+                    <div class="filter-title" onclick="toggleFilter('sizeFilter')">
+                        <span>Tamaño de Raza</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content" id="sizeFilter">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sizeSmall">
+                            <label class="form-check-label" for="sizeSmall">
+                                Pequeña
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sizeMedium" checked>
+                            <label class="form-check-label" for="sizeMedium">
+                                Mediana
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sizeLarge">
+                            <label class="form-check-label" for="sizeLarge">
+                                Grande
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filtro por características -->
+                <div class="filter-section">
+                    <div class="filter-title" onclick="toggleFilter('specsFilter')">
+                        <span>Características</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content" id="specsFilter">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="specGrainFree">
+                            <label class="form-check-label" for="specGrainFree">
+                                Sin grano
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="specHypoallergenic">
+                            <label class="form-check-label" for="specHypoallergenic">
+                                Hipoalergénico
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="specWeightControl">
+                            <label class="form-check-label" for="specWeightControl">
+                                Control de peso
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filtro por precio -->
+                <div class="filter-section">
+                    <div class="filter-title" onclick="toggleFilter('priceFilter')">
+                        <span>Precio (S/)</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content" id="priceFilter">
+                        <div class="mb-3">
+                            <input type="range" class="form-range" min="10" max="200" step="10" id="priceRange">
+                            <div class="d-flex justify-content-between">
+                                <span>10</span>
+                                <span>200+</span>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <button class="btn btn-sm btn-outline-primary w-100">Aplicar</button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-sm btn-outline-secondary w-100">Limpiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Productos - Columna Derecha -->
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-outline-secondary me-2 d-lg-none" id="mobileFilterBtn">
+                            <i class="fas fa-filter me-1"></i> Filtros
+                        </button>
+                        <span class="text-muted">Mostrando 24 de 86 productos</span>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown">
+                            Ordenar por: Relevancia
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Relevancia</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: Menor a mayor</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: Mayor a menor</a></li>
+                            <li><a class="dropdown-item" href="#">Mejor valorados</a></li>
+                            <li><a class="dropdown-item" href="#">Novedades</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <!-- Producto 1 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <div class="product-badge">-10%</div>
+                            <img src="assets/Canbo/2.png" alt="Croquetas Premium" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Pate Premium para Cachorros</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/89.90</span>
+                                    <span class="product-old-price ms-2">s/99.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="small ms-1">(42)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Cachorro</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Mediana</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Pollo</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Producto 2 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <img src="assets/Canbo/3.png" alt="Croquetas Gato" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Pate para Perros Adultos</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/65.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span class="small ms-1">(28)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Adulto</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Pollo</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <div class="product-badge">Nuevo</div>
+                            <img src="assets/Canbo/6.png" alt="Croquetas Senior" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Croquetas para Perro Senior</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/109.90</span>
+                                    <span class="product-old-price ms-2">s/119.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="small ms-1">(56)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Senior</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Grande</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Articulaciones</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <div class="product-badge">Nuevo</div>
+                            <img src="assets/Canbo/7.png" alt="Croquetas Senior" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Pate para Perro Senior</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/75.90</span>
+                                    <span class="product-old-price ms-2">s/119.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="small ms-1">(56)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Senior</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Grande</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Articulaciones</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <div class="product-badge">-10%</div>
+                            <img src="assets/Canbo/8.png" alt="Croquetas Senior" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Croquetas para Perro Senior</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/109.90</span>
+                                    <span class="product-old-price ms-2">s/119.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="small ms-1">(56)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Senior</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Grande</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Articulaciones</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <img src="assets/Canbo/9.png" alt="Croquetas Senior" class="img-fluid ">
+                            <div class="product-body">
+                                <h3 class="product-title">Croquetas para Perro Cachorros</h3>
+                                <p class="product-brand">Canba</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/109.90</span>
+                                    <span class="product-old-price ms-2">s/119.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="small ms-1">(56)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Senior</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Grande</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Articulaciones</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <div class="product-badge">-15%</div>
+                            <img src="assets/Canbo/10.png" alt="Croquetas Senior" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Croquetas para Perro Senior</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/109.90</span>
+                                    <span class="product-old-price ms-2">s/119.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="small ms-1">(56)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Senior</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Grande</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Articulaciones</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <div class="product-badge">-5%</div>
+                            <img src="assets/Canbo/11.png" alt="Croquetas Senior" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Croquetas para Perro cachorros</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/109.90</span>
+                                    <span class="product-old-price ms-2">s/119.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="small ms-1">(56)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Senior</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Grande</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Articulaciones</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="canbo-pate.html" class="text-decoration-none text-black">
+                        <div class="product-card">
+                            <div class="product-badge">Nuevo</div>
+                            <img src="assets/Canbo/12.png" alt="Croquetas Senior" class="img-fluid">
+                            <div class="product-body">
+                                <h3 class="product-title">Croquetas para Perros Adultos</h3>
+                                <p class="product-brand">Canbo</p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="product-price">s/109.90</span>
+                                    <span class="product-old-price ms-2">s/119.90</span>
+                                </div>
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="small ms-1">(56)</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-2">
+                                    <span class="badge bg-light text-dark me-1 mb-1">Senior</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Grande</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Res</span>
+                                    <span class="badge bg-light text-dark me-1 mb-1">Articulaciones</span>
+                                </div>
+                                <button class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Más productos... -->
+                </div>
+                
+                <!-- Paginación -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script>
+        // Mostrar/ocultar filtros en móvil
+        document.getElementById('mobileFilterBtn').addEventListener('click', function() {
+            document.getElementById('filterColumn').classList.add('active');
+            document.getElementById('filterOverlay').classList.add('active');
+        });
+        
+        document.getElementById('closeFilters').addEventListener('click', function() {
+            document.getElementById('filterColumn').classList.remove('active');
+            document.getElementById('filterOverlay').classList.remove('active');
+        });
+        
+        document.getElementById('filterOverlay').addEventListener('click', function() {
+            document.getElementById('filterColumn').classList.remove('active');
+            this.classList.remove('active');
+        });
+        
+        // Mostrar/ocultar contenido de filtros
+        function toggleFilter(filterId) {
+            const filter = document.getElementById(filterId);
+            const icon = filter.previousElementSibling.querySelector('i');
+            
+            if (filter.style.maxHeight) {
+                filter.style.maxHeight = null;
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                filter.style.maxHeight = filter.scrollHeight + "px";
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
+        
+        // Mostrar botón de filtros en móvil
+        function checkScreenSize() {
+            const mobileFilterBtn = document.getElementById('mobileFilterBtn');
+            if (window.innerWidth < 992) {
+                mobileFilterBtn.style.display = 'flex';
+            } else {
+                mobileFilterBtn.style.display = 'none';
+                document.getElementById('filterColumn').classList.remove('active');
+                document.getElementById('filterOverlay').classList.remove('active');
+            }
+        }
+        
+        window.addEventListener('resize', checkScreenSize);
+        window.addEventListener('load', checkScreenSize);
+        
+        // Inicializar filtros abiertos
+        document.addEventListener('DOMContentLoaded', function() {
+            const filters = ['petFilter', 'brandFilter', 'ageFilter', 'sizeFilter', 'specsFilter', 'priceFilter'];
+            filters.forEach(filterId => {
+                const filter = document.getElementById(filterId);
+                filter.style.maxHeight = filter.scrollHeight + "px";
+                const icon = filter.previousElementSibling.querySelector('i');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            });
+        });
+    </script>
+</body>
+</html>
