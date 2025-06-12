@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro de Reclamaciones - World Paws</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d00d1e;
+            --secondary-color: #4ECDC4;
+            --dark-color: #292F36;
+            --light-color: #F7FFF7;
+            --gray-light: #f8f9fa;
+            --pet-accent: #FF9F1C;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        .required-field::after {
+            content: " *";
+            color: var(--primary-color);
+        }
+        
+        .form-container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-top: 8px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%234ECDC4" d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 19.9 0 26.7 7.7z"/></svg>') no-repeat;
+            opacity: 0.1;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, rgba(208,13,30,0.9) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-section::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="white" opacity="0.1" d="M309.5 219.2c-1.3-3.2-22.1-55.9-71.2-83.3-6.1-3.4-12.8-5.2-19.6-5.2H96c-7.5 0-14.3 4.6-17 11.6-2.6 6.9-1.1 14.7 3.9 20.2L166.4 192l-63.5 54.5c-5 5.3-6.5 13.1-3.9 20.2 2.6 7 9.4 11.6 17 11.6h122.5c9.8 0 18.5-4.8 24-12.1 20.2-26.8 53.3-90.4 63.7-110.3 1.6-3.1 1.3-6.8-.5-9.7zM568.2 336.3c13.1-17.9 9.3-42.8-8.6-55.9-12.9-9.4-29.2-11.9-44.5-7.5l-61.3 20.4-30.4-75.9C411.5 198.6 390.7 192 368 192c-27.1 0-50.4 12.9-61.8 32.5-81.2 0-151.1 38.9-182.2 98.2C49.5 363.5 0 448 0 448c58.5 28.3 125.4 32.5 181.3 16.3 6.4-1.8 11.8-4.6 16.3-8.2 0 0 .1-.1 .1-.1C242.4 416.1 300.2 384 368 384c6.3 0 12.5 .3 18.6 1 1.6-4.8 5.3-8.9 10.1-10.6 14.1-4.9 29.5-1.9 39.9 8.1l42.7 41.6c7.4 7.2 18.4 8.9 27.5 4.3C534.9 431.7 576 372.9 576 372.9c-10.6-23.1-23.8-45.5-38.1-66.1l-.4 29.5z"/></svg>') no-repeat;
+        }
+        
+        h1 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--pet-accent);
+        }
+        
+        h2, h3 {
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b00c1a;
+            border-color: #b00c1a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(208,13,30,0.3);
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+        }
+        
+        .form-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        hr.divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--secondary-color) 50%, transparent 100%);
+            margin: 2.5rem 0;
+            opacity: 0.3;
+        }
+        
+        .contact-info {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background-color: var(--pet-accent);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+        
+        .contact-info i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            max-height: 80px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .pet-icon {
+            color: var(--pet-accent);
+            margin-right: 10px;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 70%;
+            width: 4px;
+            background-color: var(--pet-accent);
+            border-radius: 4px;
+        }
+        
+        .floating-label {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .floating-label label {
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            padding: 0 5px;
+            background: white;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .motivo-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .motivo-option:hover {
+            border-color: var(--secondary-color);
+            background-color: rgba(78, 205, 196, 0.05);
+        }
+        
+        .motivo-option i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: var(--pet-accent);
+        }
+        
+        .motivo-option.active {
+            border-color: var(--primary-color);
+            background-color: rgba(208,13,30,0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+                border-radius: 0;
+            }
+            
+            .header-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="form-container">
+            <div class="logo-container">
+                <div style="font-size: 2.8rem; color: var(--primary-color); font-weight: 800; letter-spacing: 1px;">
+                    <i class="fas fa-paw pet-icon"></i> WORLD PAWS
+                </div>
+                <p class="text-muted mt-2">Accesorios y servicios para tu mascota</p>
+            </div>
+            
+            <div class="header-section">
+                <h1><i class="fas fa-book-open me-2"></i> Libro de Reclamaciones</h1>
+                <p class="mb-0">En World Paws nos importa tu satisfacción. Por favor completa este formulario para atender tu reclamo o queja.</p>
+            </div>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-store"></i> <strong>World Paws S.A.C. BUC 20337564273</strong></p>
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> Av. Las Mascotas 123, San Isidro, Lima</p>
+                <p class="mb-0"><i class="fas fa-info-circle"></i> Este medio es exclusivo para reclamos y quejas. Para otros asuntos contáctanos al WhatsApp 987 654 321 o en nuestras tiendas.</p>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-user-circle me-2"></i> Datos personales</h2>
+            
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="floating-label">
+                            <label for="tipoDocumento" class="required-field">Tipo de Documento</label>
+                            <select class="form-select" id="tipoDocumento" required>
+                                <option selected disabled value="">Seleccione su documento</option>
+                                <option value="dni">DNI</option>
+                                <option value="ce">Carnet de Extranjería</option>
+                                <option value="pasaporte">Pasaporte</option>
+                                <option value="ruc">RUC</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label">
+                            <label for="numeroDocumento" class="required-field">Número de Documento</label>
+                            <input type="text" class="form-control" id="numeroDocumento" placeholder="Ingrese su número" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="floating-label">
+                    <label for="nombreCliente" class="required-field">Nombre Completo</label>
+                    <input type="text" class="form-control" id="nombreCliente" placeholder="Ingrese su nombre completo" required>
+                    <div class="form-text">Máximo 50 caracteres</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="floating-label">
+                            <label for="telefonoFijo">Teléfono Fijo</label>
+                            <input type="tel" class="form-control" id="telefonoFijo" placeholder="Opcional">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label">
+                            <label for="telefonoCelular" class="required-field">Teléfono Celular</label>
+                            <input type="tel" class="form-control" id="telefonoCelular" placeholder="Ingrese su celular" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="floating-label">
+                    <label for="correoElectronico" class="required-field">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correoElectronico" placeholder="ejemplo@correo.com" required>
+                </div>
+
+                <div class="floating-label">
+                    <label for="domicilio" class="required-field">Domicilio</label>
+                    <input type="text" class="form-control" id="domicilio" placeholder="Ingrese su dirección completa" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="floating-label">
+                            <label for="departamento" class="required-field">Departamento</label>
+                            <select class="form-select" id="departamento" required>
+                                <option selected disabled value="">Seleccione</option>
+                                <option value="lima">Lima</option>
+                                <option value="arequipa">Arequipa</option>
+                                <option value="cuzco">Cuzco</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label">
+                            <label for="provincia" class="required-field">Provincia</label>
+                            <select class="form-select" id="provincia" required>
+                                <option selected disabled value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label">
+                            <label for="distrito" class="required-field">Distrito</label>
+                            <select class="form-select" id="distrito" required>
+                                <option selected disabled value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <h2 class="section-title"><i class="fas fa-question-circle me-2"></i> Detalles de tu reclamo</h2>
+                
+                <div class="mb-4">
+                    <p class="text-muted mb-3">Selecciona el motivo que mejor describa tu situación:</p>
+                    
+                    <div class="motivo-option">
+                        <i class="fas fa-user-tie"></i>
+                        <div>
+                            <h5 class="mb-1">Queja por atención</h5>
+                            <p class="mb-0 small text-muted">Descontento con el servicio recibido (veterinaria, baño, etc.)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="motivo-option">
+                        <i class="fas fa-bone"></i>
+                        <div>
+                            <h5 class="mb-1">Reclamo por producto</h5>
+                            <p class="mb-0 small text-muted">Problema con accesorios, alimentos o medicamentos</p>
+                        </div>
+                    </div>
+                    
+                    <div class="motivo-option">
+                        <i class="fas fa-clipboard-list"></i>
+                        <div>
+                            <h5 class="mb-1">Otro motivo</h5>
+                            <p class="mb-0 small text-muted">Otra situación que deseas reportar</p>
+                        </div>
+                    </div>
+
+                    <div class="floating-label mt-4">
+                        <label for="fechaIncidente">Fecha del incidente</label>
+                        <input type="date" class="form-control" id="fechaIncidente" value="2025-05-18">
+                    </div>
+                    
+                    <div class="floating-label mt-3">
+                        <label for="detalleReclamo" class="required-field">Detalla tu reclamo</label>
+                        <textarea class="form-control" id="detalleReclamo" rows="4" placeholder="Describe con detalle lo ocurrido..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane me-2"></i> ENVIAR RECLAMO
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Efecto para las opciones de motivo
+        document.querySelectorAll('.motivo-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.motivo-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Lógica para departamentos/provincias/distritos
+        document.getElementById('departamento').addEventListener('change', function() {
+            // Implementar lógica según necesidad
+        });
+    </script>
+</body>
+</html>
