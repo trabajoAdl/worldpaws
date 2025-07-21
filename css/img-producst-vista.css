@@ -1,0 +1,51 @@
+/* Optional: Add some styling for the active thumbnail */
+
+.color-option {
+  position: relative;
+  display: inline-block;
+}
+
+.color-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.color-radio + label {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.color-radio:checked + label {
+  border-color: #333;
+  transform: scale(1.1);
+}
+
+.color-radio:focus + label {
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.color-option:hover label {
+  transform: scale(1.1);
+}
+
+.thumbnail-img {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.thumbnail-img:hover {
+  border-color: #ddd;
+}
+
+.active-thumbnail {
+  border-color: #DA3F3F !important;
+}
+

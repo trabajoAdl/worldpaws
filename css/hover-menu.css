@@ -1,0 +1,28 @@
+.nav-content-hover {
+  opacity: 0;
+  width: 100vw;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /*Opcional: para que no cause scroll horizontal;*/
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 9px;
+  visibility: hidden;
+  text-align: start;
+}
+
+.hover-menu-li:hover {
+  border-bottom: 1px solid black;
+}
+
+.hover-menu-li:hover .nav-content-hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
