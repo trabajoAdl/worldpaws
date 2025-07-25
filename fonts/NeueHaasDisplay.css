@@ -1,0 +1,127 @@
+/* Roman (Normal 400) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayRoman.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Roman Italic (400) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayRomanItalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Bold (700) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayBold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Bold Italic (700) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayBoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Light (300) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayLight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* Light Italic (300) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayLightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+/* Medium (500) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayMediu.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Medium Italic (500) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayMediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* Black (900) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayBlack.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Black Italic (900) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayBlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* Thin (100) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayThin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+/* Thin Italic (100) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+/* Extra Thin (XThin, 50) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayXThin.ttf') format('truetype');
+    font-weight: 50;
+    font-style: normal;
+}
+
+/* Extra Thin Italic (XThin, 50) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayXThinItalic.ttf') format('truetype');
+    font-weight: 50;
+    font-style: italic;
+}
+
+/* Ultra Thin (XXThin, 25) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayXXThin.ttf') format('truetype');
+    font-weight: 25;
+    font-style: normal;
+}
+
+/* Ultra Thin Italic (XXThin, 25) */
+@font-face {
+    font-family: 'NeueHaasDisplay';
+    src: url('https://trabajoadl.github.io/worldpaws/fonts/NeueHaasDisplayXXThinItalic.ttf') format('truetype');
+    font-weight: 25;
+    font-style: italic;
+}
